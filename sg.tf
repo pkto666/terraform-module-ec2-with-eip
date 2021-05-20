@@ -4,8 +4,8 @@ resource "aws_security_group" "sg" {
   vpc_id      = var.vpc_id
 
   ingress {
-    from_port   = 22
-    to_port     = 22
+    from_port   = 0
+    to_port     = 0
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -18,6 +18,10 @@ resource "aws_security_group" "sg" {
   }
 
   tags = {
-    Name = "allow_ssh"
+    Name = "allow_all"
+  }
+
+  lifecycle {
+    create_before_destroy = true
   }
 }
